@@ -1,7 +1,40 @@
-import { Mic, GitBranch, Database, Layers, Zap, ExternalLink, CalendarDays, Server, Cpu } from "lucide-react";
+import { useState } from "react";
+import { Mic, GitBranch, Database, Layers, Zap, ExternalLink, CalendarDays, Server, Cpu, ChevronDown, Github } from "lucide-react";
 import FadeIn from "../components/FadeIn";
 import SectionLabel from "../components/SectionLabel";
 import Tag from "../components/Tag";
+
+/* ── Accordion ── */
+const Accordion = ({ icon: Icon, label, color, children }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="mb-6">
+      <button
+        onClick={() => setOpen(v => !v)}
+        className="flex items-center gap-2 w-full text-left group mb-0"
+        style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+      >
+        <Icon size={13} className="text-zinc-600" />
+        <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider flex-1">{label}</p>
+        <ChevronDown size={13} style={{
+          color: "#52525b",
+          transition: "transform 0.25s",
+          transform: open ? "rotate(180deg)" : "rotate(0deg)",
+          flexShrink: 0,
+        }} />
+      </button>
+      <div style={{
+        overflow: "hidden",
+        maxHeight: open ? 800 : 0,
+        opacity: open ? 1 : 0,
+        transition: "max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s",
+        marginTop: open ? 12 : 0,
+      }}>
+        {children}
+      </div>
+    </div>
+  );
+};
 
 /* ── Pitch Scout ── */
 const PitchScout = () => (
@@ -111,12 +144,8 @@ const PitchScout = () => (
         </div>
       </div>
 
-      {/* 実装の工夫 */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-3">
-          <Zap size={13} className="text-zinc-600" />
-          <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider">実装の工夫</p>
-        </div>
+      {/* 実装の工夫 (accordion) */}
+      <Accordion icon={Zap} label="実装の工夫">
         <div className="space-y-2.5">
           {[
             { title: "段階的信頼度フォールバック", desc: "CREPE の信頼度閾値を [0.5→0.01] で段階的に下げ、常に最低 5 フレームを確保。中央値からの音程差に応じて要求信頼度を動的に変化させノイズ混入を防止。" },
@@ -130,7 +159,7 @@ const PitchScout = () => (
             </div>
           ))}
         </div>
-      </div>
+      </Accordion>
 
       <div className="flex flex-wrap gap-1.5 mb-6">
         {["Python", "FastAPI", "Demucs", "CREPE", "DeepFilterNet", "scikit-learn", "librosa", "SQLite", "Git/GitHub"].map(t => (
@@ -138,11 +167,25 @@ const PitchScout = () => (
         ))}
       </div>
 
-      <a href="https://pitch-scout.vercel.app/" target="_blank" rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3 group" style={{ color: "#34d399" }}>
-        <ExternalLink size={15} />
-        <span>Live Demo</span>
-      </a>
+      {/* Screenshot */}
+      <div className="mb-6 rounded-xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+        <img src="/pitch-scout-screenshot.png" alt="Pitch Scout スクリーンショット"
+          className="w-full object-cover object-top"
+          style={{ maxHeight: 280, display: "block" }} />
+      </div>
+
+      <div className="flex flex-wrap items-center gap-4">
+        <a href="https://pitch-scout.vercel.app/" target="_blank" rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3" style={{ color: "#34d399" }}>
+          <ExternalLink size={15} />
+          <span>Live Demo</span>
+        </a>
+        <a href="https://github.com/itukis/pitch-scout" target="_blank" rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3" style={{ color: "#a1a1aa" }}>
+          <Github size={15} />
+          <span>GitHub</span>
+        </a>
+      </div>
     </div>
   </div>
 );
@@ -255,12 +298,8 @@ const SmartSchedule = () => (
         </div>
       </div>
 
-      {/* 設計の工夫 */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-3">
-          <Zap size={13} className="text-zinc-600" />
-          <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider">設計の工夫</p>
-        </div>
+      {/* 設計の工夫 (accordion) */}
+      <Accordion icon={Zap} label="設計の工夫">
         <div className="space-y-2.5">
           {[
             { title: "スキル診断によるパーソナライズ", desc: "30問のクイズで集中持続力・先延ばし傾向・作業スピードを数値化。課題カテゴリ別にバッファ倍率（1.0×〜2.5×）を自動算出し、個人差を考慮したスケジュールを生成。" },
@@ -274,9 +313,9 @@ const SmartSchedule = () => (
             </div>
           ))}
         </div>
-      </div>
+      </Accordion>
 
-      <div className="flex flex-wrap gap-1.5">
+      <div className="flex flex-wrap gap-1.5 mb-6">
         {["Next.js 14", "TypeScript", "Supabase", "NextAuth.js", "Tailwind CSS", "shadcn/ui", "Google API", "PWA"].map(t => (
           <span key={t} className="inline-flex items-center text-xs font-medium px-2.5 py-1 rounded-md"
             style={{ background: "rgba(6,182,212,0.06)", border: "1px solid rgba(6,182,212,0.16)", color: "#67e8f9" }}>
@@ -284,6 +323,12 @@ const SmartSchedule = () => (
           </span>
         ))}
       </div>
+
+      <a href="https://github.com/itukis/smart-schedule" target="_blank" rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3" style={{ color: "#a1a1aa" }}>
+        <Github size={15} />
+        <span>GitHub</span>
+      </a>
     </div>
   </div>
 );

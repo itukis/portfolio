@@ -1,4 +1,4 @@
-import { GraduationCap, MapPin, Search, Briefcase, FileCode } from "lucide-react";
+import { GraduationCap, MapPin, Search, Briefcase, FileCode, Trophy } from "lucide-react";
 import FadeIn from "../components/FadeIn";
 import SectionLabel from "../components/SectionLabel";
 
@@ -32,10 +32,11 @@ const AboutSection = () => (
         <FadeIn delay={0.2}>
           <div className="glass-card p-5 space-y-3.5">
             {[
-              { icon: GraduationCap, label: "学歴",   value: "近畿大学 情報学部",         color: "#818cf8" },
-              { icon: MapPin,        label: "所在地", value: "大阪",                      color: "#f472b6" },
-              { icon: Search,        label: "興味",   value: "Security / ML / Backend",   color: "#22d3ee" },
-              { icon: Briefcase,     label: "状況",   value: "初インターン探し中",          color: "#34d399" },
+              { icon: GraduationCap, label: "学歴",   value: "近畿大学 情報学部",            color: "#818cf8" },
+              { icon: MapPin,        label: "所在地", value: "大阪",                         color: "#f472b6" },
+              { icon: Search,        label: "興味",   value: "Security / ML / Backend",      color: "#22d3ee" },
+              { icon: Briefcase,     label: "状況",   value: "初インターン探し中",             color: "#34d399" },
+              { icon: Trophy,        label: "受賞",   value: "Kindai Innovation Award '25",  color: "#fbbf24" },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"

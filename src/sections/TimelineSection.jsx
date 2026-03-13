@@ -4,7 +4,7 @@ import SectionLabel from "../components/SectionLabel";
 
 const timelineData = [
   { year: "2015.10", title: "プログラミング学習開始",          desc: "e-kagakuに入会し、e-gadgetを活用したプログラミングの基礎とモノづくりを学び始める。" },
-  { year: "2019.xx", title: "琵琶湖環境プロジェクト参画",       desc: "e-kagakuにて環境データの収集・分析プロジェクトに参加。" },
+  { year: "2019.xx", title: "琵琶湖環境プロジェクト参加",       desc: "e-kagakuにて環境データの収集・分析プロジェクトに参加。" },
   { year: "2020.xx", title: "成層圏探査とデータ分析",           desc: "百均アイテムとMATLABを活用した成層圏探査プロジェクトに参加。ハードウェアとデータ分析を経験。" },
   { year: "2024.03", title: "e-kagaku 卒業",                   desc: "基礎・応用課程を修了。Arduino, VBA, MATLABを用いた機械学習を習得。" },
   { year: "2024.04", title: "近畿大学 入学",                   desc: "情報学部 情報学科へ入学。より専門的なCS・情報工学の学習を開始。" },
