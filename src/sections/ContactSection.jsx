@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Mail, Copy, Check, Github, Send } from "lucide-react";
 import FadeIn from "../components/FadeIn";
 import SectionLabel from "../components/SectionLabel";
+import { useLang } from "../context/LangContext";
 
 const GMAIL  = "https://mail.google.com/mail/?view=cm&to=kanaden0821@gmail.com";
 const EMAIL  = "kanaden0821@gmail.com";
@@ -25,6 +26,9 @@ const inputStyle = {
 };
 
 const ContactSection = () => {
+  const { t } = useLang();
+  const c = t.contact;
+
   const [copied, setCopied] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitState, setSubmitState] = useState("idle"); // idle | sending | success | error
@@ -63,10 +67,10 @@ const ContactSection = () => {
     <section id="contact" className="py-20 sm:py-28 px-5 sm:px-8">
       <div className="max-w-2xl mx-auto text-center">
         <FadeIn>
-          <SectionLabel icon={Mail} label="CONTACT" />
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 glitch-hover transition-colors inline-block">お問い合わせ<span className="cursor-blink text-emerald-400 font-normal">_</span></h2>
+          <SectionLabel icon={Mail} label={c.label} />
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 glitch-hover transition-colors inline-block">{c.heading}<span className="cursor-blink text-emerald-400 font-normal">_</span></h2>
           <p className="text-sm text-zinc-500 mb-10 max-w-md mx-auto">
-            インターンのご相談やお仕事のご依頼など、お気軽にご連絡ください。
+            {c.subheading}
           </p>
         </FadeIn>
 
@@ -79,26 +83,26 @@ const ContactSection = () => {
                   style={{ background: "rgba(52,211,153,0.1)", border: "1px solid rgba(52,211,153,0.25)" }}>
                   <Check size={22} style={{ color: "#34d399" }} />
                 </div>
-                <p className="text-sm font-medium text-zinc-300">送信しました！お返事をお待ちください。</p>
+                <p className="text-sm font-medium text-zinc-300">{c.success}</p>
                 <button onClick={() => setSubmitState("idle")}
                   className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors mt-1">
-                  もう一度送る
+                  {c.sendAgain}
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs text-zinc-500 mb-1.5 uppercase tracking-wider">お名前</label>
+                    <label className="block text-xs text-zinc-500 mb-1.5 uppercase tracking-wider">{c.nameLabel}</label>
                     <input
                       name="name" type="text" required value={form.name} onChange={handleChange}
-                      placeholder="山田 太郎" style={inputStyle}
+                      placeholder={c.namePlaceholder} style={inputStyle}
                       onFocus={e => e.target.style.borderColor = "rgba(129,140,248,0.4)"}
                       onBlur={e  => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-zinc-500 mb-1.5 uppercase tracking-wider">メールアドレス</label>
+                    <label className="block text-xs text-zinc-500 mb-1.5 uppercase tracking-wider">{c.emailLabel}</label>
                     <input
                       name="email" type="email" required value={form.email} onChange={handleChange}
                       placeholder="example@email.com" style={inputStyle}
@@ -108,23 +112,23 @@ const ContactSection = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs text-zinc-500 mb-1.5 uppercase tracking-wider">メッセージ</label>
+                  <label className="block text-xs text-zinc-500 mb-1.5 uppercase tracking-wider">{c.messageLabel}</label>
                   <textarea
                     name="message" required value={form.message} onChange={handleChange}
-                    rows={4} placeholder="ご用件をお書きください..."
+                    rows={4} placeholder={c.messagePlaceholder}
                     style={{ ...inputStyle, resize: "vertical", minHeight: 100 }}
                     onFocus={e => e.target.style.borderColor = "rgba(129,140,248,0.4)"}
                     onBlur={e  => e.target.style.borderColor = "rgba(255,255,255,0.08)"}
                   />
                 </div>
                 {submitState === "error" && (
-                  <p className="text-xs text-red-400">送信に失敗しました。メールで直接ご連絡ください。</p>
+                  <p className="text-xs text-red-400">{c.error}</p>
                 )}
                 <button type="submit" disabled={submitState === "sending"}
                   className="w-full inline-flex items-center justify-center gap-2.5 py-3 rounded-xl text-sm font-semibold text-white transition-all hover:brightness-110 active:scale-[0.98] disabled:opacity-60"
                   style={{ background: "linear-gradient(135deg,#6366f1,#7c3aed)", boxShadow: "0 4px 24px rgba(99,102,241,0.25), inset 0 1px 0 rgba(255,255,255,0.1)" }}>
                   <Send size={15} />
-                  {submitState === "sending" ? "送信中..." : "送信する"}
+                  {submitState === "sending" ? c.sending : c.send}
                 </button>
               </form>
             )}
@@ -150,7 +154,7 @@ const ContactSection = () => {
                   color: copied ? "#34d399" : "#71717a",
                   flexShrink: 0,
                 }}
-                aria-label="メールアドレスをコピー"
+                aria-label={c.copyEmail}
               >
                 {copied ? <Check size={13} /> : <Copy size={13} />}
               </button>
@@ -161,7 +165,7 @@ const ContactSection = () => {
             <a href={GMAIL} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl text-sm font-semibold text-white transition-all hover:brightness-110 hover:shadow-lg active:scale-[0.97]"
               style={{ background: "linear-gradient(135deg,#6366f1,#7c3aed)", boxShadow: "0 4px 24px rgba(99,102,241,0.25), inset 0 1px 0 rgba(255,255,255,0.1)" }}>
-              <Mail size={16} /> メールを送る
+              <Mail size={16} /> {c.sendEmail}
             </a>
             <a href={GITHUB} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl text-sm font-semibold transition-all hover:brightness-125 active:scale-[0.97]"

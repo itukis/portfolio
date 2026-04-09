@@ -8,19 +8,21 @@ import ProjectsSection from "./sections/ProjectsSection";
 import SkillsSection   from "./sections/SkillsSection";
 import ContactSection  from "./sections/ContactSection";
 import LoadingScreen   from "./components/LoadingScreen";
-
-const NAV_ITEMS = [
-  { id: "about",    label: "About" },
-  { id: "timeline", label: "Timeline" },
-  { id: "projects", label: "Projects" },
-  { id: "skills",   label: "Skills" },
-  { id: "contact",  label: "Contact" },
-];
+import { LangProvider, useLang } from "./context/LangContext";
 
 const SECTION_ORDER = ["hero", "about", "timeline", "projects", "skills", "contact"];
 const SCROLL_IDS    = ["contact", "skills", "projects", "timeline", "about", "hero"];
 
 export default function Portfolio() {
+  return (
+    <LangProvider>
+      <PortfolioInner />
+    </LangProvider>
+  );
+}
+
+function PortfolioInner() {
+  const { t, toggle } = useLang();
   const [scrollY,       setScrollY]       = useState(0);
   const [scrollPct,     setScrollPct]     = useState(0);
   const [activeNav,     setActiveNav]     = useState("hero");
@@ -150,9 +152,9 @@ export default function Portfolio() {
             style={{ height: 36, background: "rgba(52,211,153,0.06)", borderBottom: "1px solid rgba(52,211,153,0.12)", backdropFilter: "blur(12px)" }}>
             <span className="w-1.5 h-1.5 rounded-full pulse-dot flex-shrink-0" style={{ background: "#34d399", display: "inline-block" }} />
             <span className="text-xs font-medium" style={{ color: "#6ee7b7", fontFamily: "'JetBrains Mono',monospace" }}>
-              現在インターン募集中 — バックエンド / ML / セキュリティ分野
+              {t.banner}
             </span>
-            <button onClick={dismissBanner} className="ml-auto text-zinc-600 hover:text-zinc-400 transition-colors" aria-label="閉じる">
+            <button onClick={dismissBanner} className="ml-auto text-zinc-600 hover:text-zinc-400 transition-colors" aria-label={t.bannerClose}>
               <X size={14} />
             </button>
           </div>
@@ -186,32 +188,47 @@ export default function Portfolio() {
             </button>
 
             <div className="hidden md:flex items-center gap-1">
-              {NAV_ITEMS.map(n => (
-                <button key={n.id} onClick={() => go(n.id)}
+              {Object.entries(t.nav).map(([id, label]) => (
+                <button key={id} onClick={() => go(id)}
                   className="px-3.5 py-1.5 rounded-lg text-sm transition-all"
                   style={{
-                    color:      activeNav === n.id ? "#e4e4e7" : "#71717a",
-                    fontWeight: activeNav === n.id ? 500 : 400,
-                    background: activeNav === n.id ? "rgba(129,140,248,0.09)" : "transparent",
+                    color:      activeNav === id ? "#e4e4e7" : "#71717a",
+                    fontWeight: activeNav === id ? 500 : 400,
+                    background: activeNav === id ? "rgba(129,140,248,0.09)" : "transparent",
                   }}>
-                  {n.label}
+                  {label}
                 </button>
               ))}
             </div>
 
-            <button className="md:hidden p-2 text-zinc-400 hover:text-white transition-colors"
-              onClick={() => setMobileMenu(!mobileMenu)}>
-              {mobileMenu ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            <div className="flex items-center gap-2">
+              {/* Language toggle */}
+              <button
+                onClick={toggle}
+                className="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all hover:brightness-110"
+                style={{
+                  background: "rgba(129,140,248,0.1)",
+                  border: "1px solid rgba(129,140,248,0.22)",
+                  color: "#a5b4fc",
+                  fontFamily: "'JetBrains Mono', monospace",
+                  letterSpacing: "0.04em",
+                }}>
+                {t.lang}
+              </button>
+              <button className="md:hidden p-2 text-zinc-400 hover:text-white transition-colors"
+                onClick={() => setMobileMenu(!mobileMenu)}>
+                {mobileMenu ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
           </div>
 
           {mobileMenu && (
             <div className="md:hidden px-5 pb-5 pt-1 space-y-0.5"
               style={{ background: "rgba(8,8,16,0.97)", backdropFilter: "blur(20px)" }}>
-              {NAV_ITEMS.map(n => (
-                <button key={n.id} onClick={() => go(n.id)}
+              {Object.entries(t.nav).map(([id, label]) => (
+                <button key={id} onClick={() => go(id)}
                   className="block w-full text-left px-3 py-2.5 rounded-lg text-sm text-zinc-400 hover:text-white hover:bg-white/[0.04] transition-all">
-                  {n.label}
+                  {label}
                 </button>
               ))}
             </div>
@@ -259,7 +276,7 @@ export default function Portfolio() {
             pointerEvents: showTop ? "auto" : "none",
             boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
           }}
-          aria-label="トップへ戻る"
+          aria-label={t.backToTop}
         >
           <ChevronUp size={18} style={{ color: "#a5b4fc" }} />
         </button>
