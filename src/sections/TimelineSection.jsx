@@ -1,6 +1,7 @@
 import { Terminal } from "lucide-react";
 import FadeIn from "../components/FadeIn";
 import SectionLabel from "../components/SectionLabel";
+import LinkedText from "../components/LinkedText";
 import { useLang } from "../context/LangContext";
 
 const TimelineSection = () => {
@@ -12,7 +13,7 @@ const TimelineSection = () => {
         <FadeIn>
           <SectionLabel icon={Terminal} label={tl.label} />
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 glitch-hover transition-colors">{tl.heading}<span className="cursor-blink text-emerald-400 font-normal">_</span></h2>
-          <p className="text-sm text-zinc-600 mb-10">{tl.subheading}</p>
+          <p className="text-sm md:text-base text-zinc-600 mb-10">{tl.subheading}</p>
         </FadeIn>
 
         <div className="relative pl-10 md:pl-12 space-y-8 md:space-y-10">
@@ -26,7 +27,7 @@ const TimelineSection = () => {
                     <span className="mono text-xs sm:text-sm text-emerald-400 bg-emerald-950/30 px-2 py-1 rounded inline-block w-fit font-semibold">{item.year}</span>
                     <h3 className="text-base sm:text-lg text-white font-medium">{item.title}</h3>
                   </div>
-                  <p className="text-[0.85rem] sm:text-sm text-zinc-400 leading-relaxed max-w-2xl">{item.desc}</p>
+                  <p className="text-[0.85rem] sm:text-sm md:text-base text-zinc-400 leading-relaxed max-w-2xl"><LinkedText>{item.desc}</LinkedText></p>
                 </div>
               </div>
             </FadeIn>

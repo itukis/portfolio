@@ -3,6 +3,7 @@ import { Mic, GitBranch, Database, Layers, Zap, ExternalLink, CalendarDays, Serv
 import FadeIn from "../components/FadeIn";
 import SectionLabel from "../components/SectionLabel";
 import Tag from "../components/Tag";
+import LinkedText from "../components/LinkedText";
 import { useLang } from "../context/LangContext";
 
 /* ── Accordion ── */
@@ -74,8 +75,14 @@ const PitchScout = () => {
                 style={{ background: "rgba(52,211,153,0.08)", border: "1px solid rgba(52,211,153,0.18)", color: "#6ee7b7" }}>
                 In Progress
               </span>
+              <a href="https://pitch-scout.vercel.app/" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold text-white transition-all hover:brightness-110 active:scale-95"
+                style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)", boxShadow: "0 4px 16px rgba(99,102,241,0.4), inset 0 1px 0 rgba(255,255,255,0.12)" }}>
+                <ExternalLink size={14} />
+                Demo →
+              </a>
             </div>
-            <p className="text-sm text-zinc-500 font-medium">{p.subtitle}</p>
+            <p className="text-sm md:text-base text-zinc-500 font-medium">{p.subtitle}</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium"
@@ -86,7 +93,7 @@ const PitchScout = () => {
           </div>
         </div>
 
-        <p className="text-sm text-zinc-400 leading-relaxed mb-6">{p.description}</p>
+        <p className="text-sm md:text-base text-zinc-400 leading-relaxed mb-6"><LinkedText>{p.description}</LinkedText></p>
 
         {/* Responsibilities */}
         <div className="mb-6">
@@ -96,9 +103,9 @@ const PitchScout = () => {
           </div>
           <div className="grid sm:grid-cols-2 gap-2">
             {p.tasks.map((text, i) => (
-              <div key={i} className="flex items-start gap-2 text-sm text-zinc-400 py-1">
+              <div key={i} className="flex items-start gap-2 text-sm md:text-base text-zinc-400 py-1">
                 <span style={{ color: "#818cf8", marginTop: 3, flexShrink: 0 }}>▸</span>
-                <span>{text}</span>
+                <span><LinkedText>{text}</LinkedText></span>
               </div>
             ))}
           </div>
@@ -142,23 +149,17 @@ const PitchScout = () => {
             {p.details.map(({ title, desc }) => (
               <div key={title} className="rounded-lg px-3.5 py-3" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)" }}>
                 <p className="text-xs font-semibold text-zinc-300 mb-1">{title}</p>
-                <p className="text-xs text-zinc-500 leading-relaxed">{desc}</p>
+                <p className="text-xs text-zinc-500 leading-relaxed"><LinkedText>{desc}</LinkedText></p>
               </div>
             ))}
           </div>
         </Accordion>
 
-        <div className="flex flex-wrap gap-1.5 mb-6">
+        <div className="flex flex-wrap gap-1.5">
           {["Python", "FastAPI", "MelBandRoformers", "pyworld", "DeepFilterNet", "scikit-learn", "Supabase", "SQLite", "Git/GitHub"].map(t => (
             <Tag key={t} glow>{t}</Tag>
           ))}
         </div>
-
-        <a href="https://pitch-scout.vercel.app/" target="_blank" rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3" style={{ color: "#34d399" }}>
-          <ExternalLink size={15} />
-          <span>Live Demo</span>
-        </a>
       </div>
     </div>
   );
@@ -189,7 +190,7 @@ const SmartSchedule = () => {
                 In Progress
               </span>
             </div>
-            <p className="text-sm text-zinc-500 font-medium">{s.subtitle}</p>
+            <p className="text-sm md:text-base text-zinc-500 font-medium">{s.subtitle}</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium"
@@ -200,7 +201,7 @@ const SmartSchedule = () => {
           </div>
         </div>
 
-        <p className="text-sm text-zinc-400 leading-relaxed mb-6">{s.description}</p>
+        <p className="text-sm md:text-base text-zinc-400 leading-relaxed mb-6"><LinkedText>{s.description}</LinkedText></p>
 
         {/* Tech Stack */}
         <div className="mb-6">
@@ -242,9 +243,9 @@ const SmartSchedule = () => {
           </div>
           <div className="grid sm:grid-cols-2 gap-2">
             {s.features.map((text, i) => (
-              <div key={i} className="flex items-start gap-2 text-sm text-zinc-400 py-1">
+              <div key={i} className="flex items-start gap-2 text-sm md:text-base text-zinc-400 py-1">
                 <span style={{ color: "#06b6d4", marginTop: 3, flexShrink: 0 }}>▸</span>
-                <span>{text}</span>
+                <span><LinkedText>{text}</LinkedText></span>
               </div>
             ))}
           </div>
@@ -256,7 +257,7 @@ const SmartSchedule = () => {
             {s.details.map(({ title, desc }) => (
               <div key={title} className="rounded-lg px-3.5 py-3" style={{ background: "rgba(6,182,212,0.03)", border: "1px solid rgba(6,182,212,0.08)" }}>
                 <p className="text-xs font-semibold text-zinc-300 mb-1">{title}</p>
-                <p className="text-xs text-zinc-500 leading-relaxed">{desc}</p>
+                <p className="text-xs text-zinc-500 leading-relaxed"><LinkedText>{desc}</LinkedText></p>
               </div>
             ))}
           </div>
@@ -292,7 +293,7 @@ const ProjectsSection = () => {
         <FadeIn>
           <SectionLabel icon={Cpu} label={pr.label} />
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 glitch-hover transition-colors">{pr.heading}<span className="cursor-blink text-emerald-400 font-normal">_</span></h2>
-          <p className="text-sm text-zinc-600 mb-10">{pr.subheading}</p>
+          <p className="text-sm md:text-base text-zinc-600 mb-10">{pr.subheading}</p>
         </FadeIn>
         <FadeIn delay={0.1}><PitchScout /></FadeIn>
         <FadeIn delay={0.2}><SmartSchedule /></FadeIn>

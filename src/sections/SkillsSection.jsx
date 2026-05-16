@@ -29,7 +29,7 @@ const SkillsSection = () => {
         <FadeIn>
           <SectionLabel icon={ShieldAlert} label={sk.label} />
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 glitch-hover transition-colors">{sk.heading}<span className="cursor-blink text-emerald-400 font-normal">_</span></h2>
-          <p className="text-sm text-zinc-600 mb-10">{sk.subheading}</p>
+          <p className="text-sm md:text-base text-zinc-600 mb-10">{sk.subheading}</p>
         </FadeIn>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">

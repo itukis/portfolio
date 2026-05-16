@@ -2,7 +2,8 @@
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:'Outfit','Noto Sans JP',sans-serif;background:#080810;color:#d4d4d8;line-height:1.65;overflow-x:hidden}
+body{font-family:'Outfit','Noto Sans JP',sans-serif;background:#080810;color:#d4d4d8;line-height:1.65;overflow-x:hidden;font-size:0.875rem}
+@media(min-width:768px){body{font-size:1rem}}
 ::selection{background:rgba(129,140,248,0.25);color:#fff}
 .mono{font-family:'JetBrains Mono',monospace}
 
@@ -60,12 +61,13 @@ body{font-family:'Outfit','Noto Sans JP',sans-serif;background:#080810;color:#d4
   animation:text-sweep 4s linear infinite;
 }
 
-/* ── Project Card Glow ── */
-@keyframes border-glow{
-  0%,100%{box-shadow:0 4px 30px rgba(0,0,0,0.35),0 0 0 0 rgba(52,211,153,0)}
-  50%{box-shadow:0 4px 40px rgba(0,0,0,0.5),0 0 28px rgba(52,211,153,0.15)}
+/* ── Project Card ── */
+.project-card{
+  transition:border-color .3s,box-shadow .3s,transform .3s;
 }
-.project-card{animation:border-glow 4s ease-in-out infinite}
+.project-card:hover{
+  box-shadow:0 0 16px 4px rgba(99,102,241,0.35);
+}
 
 /* ── Float (hero widget) ── */
 @keyframes float{
@@ -85,6 +87,21 @@ body{font-family:'Outfit','Noto Sans JP',sans-serif;background:#080810;color:#d4
   animation:shimmer 3s linear infinite;
 }
 
+/* ── Tech Link ── */
+.tech-link{
+  color:inherit;
+  text-decoration:underline;
+  text-decoration-style:dotted;
+  text-decoration-color:rgba(129,140,248,0.4);
+  text-underline-offset:3px;
+  transition:color .2s,text-decoration-color .2s;
+}
+.tech-link:hover{
+  color:#a5b4fc;
+  text-decoration-style:solid;
+  text-decoration-color:#818cf8;
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:#080810}
@@ -102,7 +119,7 @@ body{font-family:'Outfit','Noto Sans JP',sans-serif;background:#080810;color:#d4
   border-color:rgba(52,211,153,0.3);
   background:rgba(52,211,153,0.03);
   transform:translateY(-4px) scale(1.01);
-  box-shadow:0 10px 40px rgba(0,0,0,0.5),0 0 20px rgba(52,211,153,0.15);
+  box-shadow:0 0 16px 4px rgba(52,211,153,0.25);
 }
 
 /* ── Skill Card ── */
@@ -128,10 +145,10 @@ body{font-family:'Outfit','Noto Sans JP',sans-serif;background:#080810;color:#d4
 .skill-card:hover{
   border-color:color-mix(in srgb,var(--accent) 40%,transparent);
   background:color-mix(in srgb,var(--accent) 5%,transparent);
-  transform:translateY(-5px) scale(1.03);
-  box-shadow:0 12px 40px rgba(0,0,0,0.5),0 0 24px color-mix(in srgb,var(--accent) 20%,transparent);
+  transform:translateY(-3px);
+  box-shadow:0 0 16px 4px color-mix(in srgb,var(--accent) 35%,transparent);
 }
-.skill-card:hover::before{opacity:1;height:3px;box-shadow:0 0 15px var(--accent)}
+.skill-card:hover::before{opacity:1;height:3px}
 
 /* ── Timeline ── */
 .timeline-line{

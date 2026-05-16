@@ -18,7 +18,7 @@ const inputStyle = {
   borderRadius: 10,
   color: "#e4e4e7",
   padding: "10px 14px",
-  fontSize: "0.875rem",
+  fontSize: "1rem",
   outline: "none",
   width: "100%",
   fontFamily: "inherit",
@@ -69,7 +69,7 @@ const ContactSection = () => {
         <FadeIn>
           <SectionLabel icon={Mail} label={c.label} />
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 glitch-hover transition-colors inline-block">{c.heading}<span className="cursor-blink text-emerald-400 font-normal">_</span></h2>
-          <p className="text-sm text-zinc-500 mb-10 max-w-md mx-auto">
+          <p className="text-sm md:text-base text-zinc-500 mb-10 max-w-md mx-auto">
             {c.subheading}
           </p>
         </FadeIn>

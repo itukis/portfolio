@@ -1,6 +1,7 @@
 import { GraduationCap, MapPin, Search, Briefcase, FileCode, Trophy } from "lucide-react";
 import FadeIn from "../components/FadeIn";
 import SectionLabel from "../components/SectionLabel";
+import LinkedText from "../components/LinkedText";
 import { useLang } from "../context/LangContext";
 
 const CARD_ICONS = [GraduationCap, MapPin, Search, Briefcase, Trophy];
@@ -15,13 +16,13 @@ const AboutSection = () => {
         <FadeIn>
           <SectionLabel icon={FileCode} label={a.label} />
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 glitch-hover transition-colors">{a.heading}<span className="cursor-blink text-emerald-400 font-normal">_</span></h2>
-          <p className="text-sm text-zinc-600 mb-10">{a.subheading}</p>
+          <p className="text-sm md:text-base text-zinc-600 mb-10">{a.subheading}</p>
         </FadeIn>
 
         <div className="grid md:grid-cols-3 gap-8 md:gap-10">
           <FadeIn delay={0.1} className="md:col-span-2">
-            <div className="space-y-4 text-sm sm:text-[0.935rem] text-zinc-400 leading-relaxed">
-              {a.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+            <div className="space-y-4 text-sm md:text-base text-zinc-400 leading-relaxed">
+              {a.paragraphs.map((p, i) => <p key={i}><LinkedText>{p}</LinkedText></p>)}
             </div>
           </FadeIn>
 

@@ -9,7 +9,7 @@ const HeroSection = ({ scrollY, go }) => {
   const { t } = useLang();
   const h = t.hero;
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden px-5">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden px-5 md:px-8">
       <div className="dot-grid absolute inset-0 pointer-events-none" style={{
         maskImage: "radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)",
         WebkitMaskImage: "radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)",
@@ -22,7 +22,8 @@ const HeroSection = ({ scrollY, go }) => {
 
       <FloatingCode />
 
-      <div className="relative z-10 max-w-2xl text-center lg:text-left lg:mr-auto lg:ml-[6%] xl:ml-[8%]">
+      <div className="relative z-10 max-w-5xl mx-auto w-full">
+      <div className="max-w-2xl text-center lg:text-left">
         <FadeIn delay={0}>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"
             style={{ background: "rgba(52,211,153,0.06)", border: "1px solid rgba(52,211,153,0.18)" }}>
@@ -46,7 +47,7 @@ const HeroSection = ({ scrollY, go }) => {
         </FadeIn>
 
         <FadeIn delay={0.32}>
-          <p className="text-sm sm:text-[0.95rem] text-zinc-400 mb-8 leading-relaxed max-w-md lg:max-w-none mx-auto lg:mx-0">
+          <p className="text-sm md:text-base text-zinc-400 mb-8 leading-relaxed max-w-md lg:max-w-none mx-auto lg:mx-0">
             {h.description}
           </p>
         </FadeIn>
@@ -80,6 +81,7 @@ const HeroSection = ({ scrollY, go }) => {
             </button>
           </div>
         </FadeIn>
+      </div>
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-25 animate-bounce">
