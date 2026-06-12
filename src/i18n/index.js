@@ -107,7 +107,7 @@ const translations = {
 
       secureCodeArena: {
         subtitle: "Gamified Secure Coding Arena",
-        description: "意図的に脆弱性を仕込んだWebアプリに対し、ユーザーがpatchを提出するとサーバー側の攻撃エンジンが「修正前は攻撃成功 / 修正後は失敗」を自動検証して合否を判定する、ゲーミフィケーション型のセキュアコーディング学習プラットフォーム。ハッカソン発のチーム開発。",
+        description: "意図的に脆弱性を仕込んだWebアプリに対し、ユーザーがpatchを提出するとサーバー側の攻撃エンジンが「修正前は攻撃成功 / 修正後は失敗」を自動検証して合否を判定する、ゲーミフィケーション型のセキュアコーディング学習プラットフォーム。4人チームによるハッカソン発のプロジェクト。",
         roleLabel: "担当・取り組み",
         roleBadge: "バックエンド担当",
         tasks: [
@@ -115,8 +115,8 @@ const translations = {
           "Docker / docker-compose で脆弱アプリを隔離コンテナ起動",
           "unified diff patchの検証フロー（`git apply --check` → 適用 → 再起動 → ヘルスチェック）",
           "攻撃エンジン制御：patch適用前後で攻撃を流して自動採点",
-          "Supabase (Auth + Postgres) でリーダーボード・問題カタログ・スコア管理",
           "コンテナのセキュリティ境界設計（read-only / memory 256MB / CPU 0.5 / iptables遮断）",
+          "脆弱アプリ側の問題セット（SQLi / XSS / IDOR 等）の整備",
         ],
         techLabel: "バックエンド技術スタック",
         techStack: [
@@ -124,10 +124,10 @@ const translations = {
           { layer: "実行環境",   tech: "Docker / docker-compose（問題毎に隔離）" },
           { layer: "Patch検証", tech: "git apply --check + コンテナ内適用" },
           { layer: "攻撃エンジン", tech: "Exploit Runner（HTTP/SQLi/XSS等）" },
-          { layer: "Auth",       tech: "Supabase Auth" },
-          { layer: "DB",         tech: "Supabase (PostgreSQL)" },
           { layer: "隔離境界",   tech: "read-only FS / mem 256MB / CPU 0.5 / iptables" },
-          { layer: "Frontend",   tech: "Next.js 16 + Monaco Editor（連携）" },
+          { layer: "ヘルス",     tech: "再起動 + ヘルスチェックゲート" },
+          { layer: "問題セット", tech: "脆弱Webアプリ（Node/PHP 等）" },
+          { layer: "連携先",     tech: "Next.js 16 + Monaco Editor フロントエンド" },
         ],
         pipelineLabel: "採点パイプライン",
         pipeline: [
@@ -155,7 +155,7 @@ const translations = {
           { title: "実挙動ベースの自動採点", desc: "正規表現的な文字列マッチではなく、攻撃エンジンを使って patch 適用前後の両方に同じ攻撃を流し、「適用前 exploited=true / 適用後 exploited=false」を満たした場合のみ合格と判定。'本当に直っているか' を実挙動で検証する仕組み。" },
           { title: "ホスト側RCE対策の多層防御", desc: "ユーザー提出物を unified diff (patch) 形式に限定し、`git apply --check` で構文・適用可否を事前検証。さらに各問題は read-only FS / メモリ 256MB / CPU 0.5 の隔離コンテナで実行し、iptables で外部通信を遮断してホスト側での任意コード実行を防止。" },
           { title: "問題ごとの独立コンテナ + ヘルスチェック", desc: "各脆弱アプリは問題ごとに独立した Docker コンテナで起動。patch 適用後は再起動 → ヘルスチェックで「アプリが壊れていないこと」を確認してから攻撃エンジンを実行し、誤判定を防ぐ。" },
-          { title: "競技性のためのリーダーボード", desc: "Supabase Postgres に問題カタログ・提出履歴・スコアを保存。解答時間や難易度に応じたスコアリングとリーダーボードで「学習」と「競技」を両立させる UX を設計。" },
+          { title: "脆弱性カタログの設計", desc: "SQLi / XSS / CSRF / IDOR / Open Redirect / コマンドインジェクションなど OWASP 系の代表的な脆弱性を、最小構成の脆弱 Web アプリとしてカタログ化。学習者が「攻撃される様子」と「直すべき箇所」を短いコードで体感できる粒度に整える。" },
         ],
       },
 
@@ -372,7 +372,7 @@ const translations = {
 
       secureCodeArena: {
         subtitle: "Gamified Secure Coding Arena",
-        description: "A gamified secure-coding platform where users submit patches to fix vulnerable web apps. The server-side attack engine automatically validates 'exploit succeeds before / fails after the patch' to grade submissions. Built as a hackathon team project.",
+        description: "A gamified secure-coding platform where users submit patches to fix vulnerable web apps. The server-side attack engine automatically validates 'exploit succeeds before / fails after the patch' to grade submissions. Built by a 4-person team as a hackathon project.",
         roleLabel: "Responsibilities",
         roleBadge: "Backend",
         tasks: [
@@ -380,8 +380,8 @@ const translations = {
           "Isolated each vulnerable app in its own Docker / docker-compose container",
           "Patch validation flow: `git apply --check` → apply → restart → health check",
           "Drove the attack engine to grade submissions by pre/post patch exploit outcome",
-          "Supabase (Auth + Postgres) for leaderboard, problem catalog, and scoring",
           "Designed container security boundary (read-only / 256 MB / 0.5 CPU / iptables egress block)",
+          "Authored the vulnerable challenge set (SQLi / XSS / IDOR, etc.)",
         ],
         techLabel: "Backend Tech Stack",
         techStack: [
@@ -389,9 +389,9 @@ const translations = {
           { layer: "Runtime",     tech: "Docker / docker-compose (per-problem)" },
           { layer: "Patch Check", tech: "git apply --check + in-container apply" },
           { layer: "Attack Eng.", tech: "Exploit Runner (HTTP / SQLi / XSS, etc.)" },
-          { layer: "Auth",        tech: "Supabase Auth" },
-          { layer: "DB",          tech: "Supabase (PostgreSQL)" },
           { layer: "Isolation",   tech: "read-only FS / 256 MB / 0.5 CPU / iptables" },
+          { layer: "Health",      tech: "Restart + health-check gate" },
+          { layer: "Challenges",  tech: "Vulnerable web apps (Node / PHP, etc.)" },
           { layer: "Frontend",    tech: "Next.js 16 + Monaco Editor (linked)" },
         ],
         pipelineLabel: "Grading Pipeline",
@@ -420,7 +420,7 @@ const translations = {
           { title: "Behavior-based Auto Grading", desc: "Instead of regex-style string matching, the same attack is run by the exploit engine both before and after the patch. A submission only passes when 'exploited=true before / exploited=false after' is satisfied — verifying whether the fix actually holds at runtime." },
           { title: "Defense-in-Depth Against Host RCE", desc: "User submissions are restricted to unified-diff patches and pre-validated with `git apply --check`. Each problem runs in an isolated container with a read-only FS, 256 MB memory, 0.5 CPU, and iptables-blocked egress — preventing arbitrary code execution from reaching the host." },
           { title: "Per-Problem Containers + Health Check", desc: "Each vulnerable app runs in its own Docker container. After applying a patch, the orchestrator restarts and health-checks the app to confirm it isn't broken before invoking the attack engine, avoiding false verdicts." },
-          { title: "Leaderboard for Competition", desc: "Problem catalog, submissions, and scores live in Supabase Postgres. Difficulty/time-based scoring and a leaderboard balance the learning and competitive sides of the experience." },
+          { title: "Vulnerability Challenge Catalog", desc: "Cataloged representative OWASP-style flaws (SQLi / XSS / CSRF / IDOR / Open Redirect / command injection) as minimal vulnerable web apps. Each challenge is tight enough that learners can both see the exploit happen and clearly identify what to fix in code." },
         ],
       },
 

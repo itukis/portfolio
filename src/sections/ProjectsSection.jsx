@@ -280,7 +280,7 @@ const SecureCodeArena = () => {
         </Accordion>
 
         <div className="flex flex-wrap gap-1.5">
-          {["Node.js", "Express", "Docker", "docker-compose", "Supabase", "PostgreSQL", "Next.js 16", "Monaco Editor", "git apply", "iptables"].map(tag => (
+          {["Node.js", "Express", "Docker", "docker-compose", "git apply", "iptables", "Linux", "Next.js 16", "Monaco Editor"].map(tag => (
             <Tag key={tag} glow>{tag}</Tag>
           ))}
         </div>

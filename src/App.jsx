@@ -33,9 +33,7 @@ function PortfolioInner() {
   const [loaded, setLoaded] = useState(() => {
     try { return !!sessionStorage.getItem("pf-loaded"); } catch { return true; }
   });
-  const [banner, setBanner] = useState(() => {
-    try { return !sessionStorage.getItem("pf-banner"); } catch { return false; }
-  });
+  const [banner, setBanner] = useState(false);
 
   const touchStartX = useRef(null);
   const touchStartY = useRef(null);
