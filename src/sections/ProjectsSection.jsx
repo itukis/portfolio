@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mic, GitBranch, Database, Layers, Zap, ExternalLink, CalendarDays, Server, Cpu, ChevronDown } from "lucide-react";
+import { Mic, GitBranch, Database, Layers, Zap, ExternalLink, CalendarDays, Server, Cpu, ChevronDown, ShieldCheck, Bug } from "lucide-react";
 import FadeIn from "../components/FadeIn";
 import SectionLabel from "../components/SectionLabel";
 import Tag from "../components/Tag";
@@ -165,6 +165,130 @@ const PitchScout = () => {
   );
 };
 
+/* ── SecureCodeArena ── */
+const SecureCodeArena = () => {
+  const { t } = useLang();
+  const sc = t.projects.secureCodeArena;
+  const acc = t.projects;
+  return (
+    <div className="mt-5 project-card overflow-hidden transition-all duration-300 hover:translate-y-[-3px]"
+      style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "18px", backdropFilter: "blur(4px)" }}>
+      <div style={{ height: 2, background: "linear-gradient(90deg, transparent, #f43f5e 20%, #fb7185 50%, #f59e0b 80%, transparent)" }} />
+
+      <div className="p-6 sm:p-8">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-6">
+          <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+            style={{ background: "linear-gradient(135deg, rgba(244,63,94,0.15), rgba(251,113,133,0.1))", border: "1px solid rgba(244,63,94,0.18)" }}>
+            <ShieldCheck size={22} style={{ color: "#fda4af" }} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-wrap items-center gap-2 mb-1 cursor-default">
+              <h3 className="text-xl sm:text-2xl font-bold text-white glitch-hover transition-colors">SecureCodeArena</h3>
+              <span className="px-2 py-0.5 rounded-md text-[0.65rem] font-medium uppercase tracking-wider pulse-dot"
+                style={{ background: "rgba(244,63,94,0.08)", border: "1px solid rgba(244,63,94,0.18)", color: "#fda4af" }}>
+                Hackathon
+              </span>
+            </div>
+            <p className="text-sm md:text-base text-zinc-500 font-medium">{sc.subtitle}</p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium"
+              style={{ background: "rgba(244,63,94,0.08)", border: "1px solid rgba(244,63,94,0.14)", color: "#fda4af" }}>
+              <Server size={11} /> {sc.roleBadge}
+            </span>
+            <span className="text-xs text-zinc-600 mono">2026.05 — 2026.06</span>
+          </div>
+        </div>
+
+        <p className="text-sm md:text-base text-zinc-400 leading-relaxed mb-6"><LinkedText>{sc.description}</LinkedText></p>
+
+        {/* Responsibilities */}
+        <div className="mb-6">
+          <div className="flex items-center gap-2 mb-3">
+            <GitBranch size={13} className="text-zinc-600" />
+            <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider">{sc.roleLabel}</p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-2">
+            {sc.tasks.map((text, i) => (
+              <div key={i} className="flex items-start gap-2 text-sm md:text-base text-zinc-400 py-1">
+                <span style={{ color: "#f43f5e", marginTop: 3, flexShrink: 0 }}>▸</span>
+                <span><LinkedText>{text}</LinkedText></span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tech Stack */}
+        <div className="mb-6">
+          <div className="flex items-center gap-2 mb-3">
+            <Layers size={13} className="text-zinc-600" />
+            <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider">{sc.techLabel}</p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
+            {sc.techStack.map(({ layer, tech }) => (
+              <div key={layer} className="flex items-baseline gap-2 text-xs py-0.5">
+                <span className="text-zinc-600 flex-shrink-0 w-16">{layer}</span>
+                <span className="text-zinc-400 mono">{tech}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Pipeline */}
+        <div className="mb-6 rounded-xl px-4 py-3" style={{ background: "rgba(244,63,94,0.04)", border: "1px solid rgba(244,63,94,0.10)" }}>
+          <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2.5">{sc.pipelineLabel}</p>
+          <div className="flex flex-wrap items-center gap-1 text-xs mono" style={{ color: "#71717a" }}>
+            {sc.pipeline.map(({ label, color }, i) => (
+              <span key={label} className="flex items-center gap-1">
+                <span className="px-2 py-0.5 rounded-md text-[0.65rem]"
+                  style={{ background: color ? `${color}12` : "rgba(255,255,255,0.03)", border: `1px solid ${color ? `${color}20` : "rgba(255,255,255,0.06)"}`, color: color || "#71717a" }}>
+                  {label}
+                </span>
+                {i < sc.pipeline.length - 1 && <span style={{ color: "#3f3f46" }}>→</span>}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Vulnerabilities */}
+        <div className="mb-6">
+          <div className="flex items-center gap-2 mb-3">
+            <Bug size={13} className="text-zinc-600" />
+            <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider">{sc.vulnLabel}</p>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {sc.vulnerabilities.map(v => (
+              <span key={v} className="inline-flex items-center text-[0.7rem] font-medium px-2.5 py-1 rounded-md mono"
+                style={{ background: "rgba(244,63,94,0.06)", border: "1px solid rgba(244,63,94,0.16)", color: "#fda4af" }}>
+                {v}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Details accordion */}
+        <Accordion icon={Zap} label={sc.detailsLabel} openLabel={acc.accordionOpen} closedLabel={acc.accordionClosed} color="#f43f5e">
+          <div className="space-y-2.5">
+            {sc.details.map(({ title, desc }) => (
+              <div key={title} className="rounded-lg px-3.5 py-3" style={{ background: "rgba(244,63,94,0.03)", border: "1px solid rgba(244,63,94,0.08)" }}>
+                <p className="text-xs font-semibold text-zinc-300 mb-1">{title}</p>
+                <p className="text-xs text-zinc-500 leading-relaxed"><LinkedText>{desc}</LinkedText></p>
+              </div>
+            ))}
+          </div>
+        </Accordion>
+
+        <div className="flex flex-wrap gap-1.5">
+          {["Node.js", "Express", "Docker", "docker-compose", "Supabase", "PostgreSQL", "Next.js 16", "Monaco Editor", "git apply", "iptables"].map(tag => (
+            <Tag key={tag} glow>{tag}</Tag>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 /* ── Smart Schedule ── */
 const SmartSchedule = () => {
   const { t } = useLang();
@@ -296,7 +420,8 @@ const ProjectsSection = () => {
           <p className="text-sm md:text-base text-zinc-600 mb-10">{pr.subheading}</p>
         </FadeIn>
         <FadeIn delay={0.1}><PitchScout /></FadeIn>
-        <FadeIn delay={0.2}><SmartSchedule /></FadeIn>
+        <FadeIn delay={0.2}><SecureCodeArena /></FadeIn>
+        <FadeIn delay={0.3}><SmartSchedule /></FadeIn>
       </div>
     </section>
   );
