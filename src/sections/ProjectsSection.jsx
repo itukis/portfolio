@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mic, GitBranch, Database, Layers, Zap, ExternalLink, CalendarDays, Server, Cpu, ChevronDown, ShieldCheck, Bug } from "lucide-react";
+import { Mic, GitBranch, Database, Layers, Zap, ExternalLink, CalendarDays, Server, Cpu, ChevronDown, ShieldCheck, Bug, Github } from "lucide-react";
 import FadeIn from "../components/FadeIn";
 import SectionLabel from "../components/SectionLabel";
 import Tag from "../components/Tag";
@@ -189,6 +189,18 @@ const SecureCodeArena = () => {
                 style={{ background: "rgba(244,63,94,0.08)", border: "1px solid rgba(244,63,94,0.18)", color: "#fda4af" }}>
                 Hackathon
               </span>
+              <a href="https://securepatch.duckdns.org/" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold text-white transition-all hover:brightness-110 active:scale-95"
+                style={{ background: "linear-gradient(135deg, #f43f5e, #fb7185)", boxShadow: "0 4px 16px rgba(244,63,94,0.4), inset 0 1px 0 rgba(255,255,255,0.12)" }}>
+                <ExternalLink size={14} />
+                Demo →
+              </a>
+              <a href="https://github.com/itukis/security-game" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-zinc-200 transition-all hover:brightness-125 active:scale-95"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.10)" }}>
+                <Github size={14} />
+                GitHub
+              </a>
             </div>
             <p className="text-sm md:text-base text-zinc-500 font-medium">{sc.subtitle}</p>
           </div>
@@ -201,7 +213,12 @@ const SecureCodeArena = () => {
           </div>
         </div>
 
-        <p className="text-sm md:text-base text-zinc-400 leading-relaxed mb-6"><LinkedText>{sc.description}</LinkedText></p>
+        <p className="text-sm md:text-base text-zinc-400 leading-relaxed mb-3"><LinkedText>{sc.description}</LinkedText></p>
+
+        <div className="mb-6 rounded-lg px-3.5 py-2.5 text-xs leading-relaxed text-zinc-400"
+          style={{ background: "rgba(244,63,94,0.05)", border: "1px solid rgba(244,63,94,0.14)" }}>
+          <LinkedText>{sc.demoNote}</LinkedText>
+        </div>
 
         {/* Responsibilities */}
         <div className="mb-6">

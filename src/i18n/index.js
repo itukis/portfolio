@@ -108,8 +108,9 @@ const translations = {
       secureCodeArena: {
         subtitle: "Gamified Secure Coding Arena",
         description: "意図的に脆弱性を仕込んだWebアプリに対し、ユーザーがpatchを提出するとサーバー側の攻撃エンジンが「修正前は攻撃成功 / 修正後は失敗」を自動検証して合否を判定する、ゲーミフィケーション型のセキュアコーディング学習プラットフォーム。4人チームによるハッカソン発のプロジェクト。",
+        demoNote: "※ Demo（Oracle VM 経由のため少し重め）: 基本問題は事前に用意した正解コード 2 パターンとの照合で判定（Docker は未起動）。応用問題はプレビュー含め実際に Docker を起動して patch を検証します。",
         roleLabel: "担当・取り組み",
-        roleBadge: "バックエンド担当",
+        roleBadge: "バックエンド・サーバー担当",
         tasks: [
           "Node.js (Express) によるオーケストレーターAPI設計・実装",
           "Docker / docker-compose で脆弱アプリを隔離コンテナ起動",
@@ -117,6 +118,7 @@ const translations = {
           "攻撃エンジン制御：patch適用前後で攻撃を流して自動採点",
           "コンテナのセキュリティ境界設計（read-only / memory 256MB / CPU 0.5 / iptables遮断）",
           "脆弱アプリ側の問題セット（SQLi / XSS / IDOR 等）の整備",
+          "Oracle VM 上で本番デプロイ・公開運用（DuckDNS で https://securepatch.duckdns.org/ として公開）",
         ],
         techLabel: "バックエンド技術スタック",
         techStack: [
@@ -373,8 +375,9 @@ const translations = {
       secureCodeArena: {
         subtitle: "Gamified Secure Coding Arena",
         description: "A gamified secure-coding platform where users submit patches to fix vulnerable web apps. The server-side attack engine automatically validates 'exploit succeeds before / fails after the patch' to grade submissions. Built by a 4-person team as a hackathon project.",
+        demoNote: "Demo note (a bit slow — fronted by an Oracle VM): basic problems are graded by matching against ~2 pre-prepared reference solutions (Docker is not running). Applied problems actually spin up Docker — including the live preview — to validate the patch.",
         roleLabel: "Responsibilities",
-        roleBadge: "Backend",
+        roleBadge: "Backend / Server",
         tasks: [
           "Designed and built the orchestrator API in Node.js (Express)",
           "Isolated each vulnerable app in its own Docker / docker-compose container",
@@ -382,6 +385,7 @@ const translations = {
           "Drove the attack engine to grade submissions by pre/post patch exploit outcome",
           "Designed container security boundary (read-only / 256 MB / 0.5 CPU / iptables egress block)",
           "Authored the vulnerable challenge set (SQLi / XSS / IDOR, etc.)",
+          "Deployed and operated the production instance on an Oracle VM (exposed via DuckDNS at https://securepatch.duckdns.org/)",
         ],
         techLabel: "Backend Tech Stack",
         techStack: [
