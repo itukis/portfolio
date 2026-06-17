@@ -53,6 +53,7 @@ const translations = {
         { year: "2025.12", title: "近大ハッカソン 受賞",              desc: "学内ハッカソンにて『Kindai Innovation Award』を受賞。" },
         { year: "2026.02", title: "KC3Hack 参加 / Pitch Scout 開発", desc: "関西最大の学生ハッカソン KC3Hack に参加。5人チームでカラオケ音域解析アプリ『Pitch Scout』を開発し、バックエンドの音声処理パイプラインと地声/裏声分類MLモデルを担当。" },
         { year: "2026.05", title: "技育博 参加",                     desc: "サポーターズ主催の学生エンジニア向け技術展示イベント『技育博』に参加（5/30）。チーム開発プロダクトの展示・他大学/他チームの学生エンジニアとの交流を通じて、開発手法やプロダクト設計のフィードバックを得る。" },
+        { year: "2026.06", title: "58Hack 参加 / OB賞受賞",          desc: "ハッカソン『58Hack』に参加（6/14）。OB賞を受賞。" },
       ],
     },
 
@@ -164,6 +165,7 @@ const translations = {
       smartSchedule: {
         subtitle: "AI-Powered Smart Scheduler for Students",
         description: "大学生向けのAIスケジュール管理アプリ。Google OAuth でログインし、Google Classroom の課題を自動取り込み・空き時間を検出して Google Calendar に自動スケジュール。スキル診断クイズでバッファ時間を最適化し、乗換案内による遅延検知・リスケ提案も実装予定。",
+        statusBadge: "一時中断中",
         roleBadge: "個人開発",
         techLabel: "技術スタック",
         techStack: [
@@ -320,6 +322,7 @@ const translations = {
         { year: "2025.12", title: "Won Award at Kindai Hackathon",          desc: "Won the 'Kindai Innovation Award' at the university-wide hackathon." },
         { year: "2026.02", title: "KC3Hack / Pitch Scout Development",      desc: "Participated in KC3Hack, the largest student hackathon in Kansai. Developed 'Pitch Scout,' a vocal range analysis app for karaoke, with a 5-person team—handling the backend audio processing pipeline and the chest/falsetto voice classification ML model." },
         { year: "2026.05", title: "Participated in Geikuhaku (技育博)",      desc: "Joined Geikuhaku on May 30 — a tech exhibition for student engineers hosted by Supporterz. Showcased team-built products and exchanged feedback on development workflows and product design with engineers from other universities." },
+        { year: "2026.06", title: "58Hack / OB Award",                       desc: "Participated in the '58Hack' hackathon on June 14 and received the OB Award." },
       ],
     },
 
@@ -431,6 +434,7 @@ const translations = {
       smartSchedule: {
         subtitle: "AI-Powered Smart Scheduler for Students",
         description: "An AI-powered schedule management app for university students. Users log in with Google OAuth, automatically import Google Classroom assignments, detect free slots, and schedule tasks to Google Calendar. Optimizes buffer time via a skill assessment quiz, with planned train delay detection and auto-rescheduling.",
+        statusBadge: "On Hold",
         roleBadge: "Solo Project",
         techLabel: "Tech Stack",
         techStack: [

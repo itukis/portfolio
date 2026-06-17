@@ -326,9 +326,9 @@ const SmartSchedule = () => {
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-1 cursor-default">
               <h3 className="text-xl sm:text-2xl font-bold text-white glitch-hover transition-colors">Smart Schedule</h3>
-              <span className="px-2 py-0.5 rounded-md text-[0.65rem] font-medium uppercase tracking-wider pulse-dot"
-                style={{ background: "rgba(6,182,212,0.08)", border: "1px solid rgba(6,182,212,0.18)", color: "#67e8f9" }}>
-                In Progress
+              <span className="px-2 py-0.5 rounded-md text-[0.65rem] font-medium uppercase tracking-wider"
+                style={{ background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.22)", color: "#fcd34d" }}>
+                {s.statusBadge}
               </span>
             </div>
             <p className="text-sm md:text-base text-zinc-500 font-medium">{s.subtitle}</p>
